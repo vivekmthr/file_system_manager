@@ -1,0 +1,60 @@
+/*
+* COMP15 Homework 4 , Spring 2020 README.md 
+* By : Vivek Mathur 
+* Completed : Jly 1st 2020
+*
+* ReadMe file
+*
+* Purpose : This file contains the designs for my implementations
+* of the_gerp.
+*
+*/
+
+
+DESIGN OF MY SORTING FUNCTIONS -Vivek Mathur
+
+Honor Certification: The work is indeed my own and not copied or adapted from
+any outside resource. I did not use any other resources except the provided ones
+and lecture slides. Used a stack exchange post to help with file_paths. 
+
+DESIGN AND IMPLEMENTATION:
+
+IMPORTANT CLASSES
+----------------------------------------------
+Instance: Represents an instance of a word, contains a pointer to the path, and the line at which it was present.
+
+Vec_node: Each vec node contains a vector of Instances, as well as a key (the word which those instances are for.) Thus each vec_node essentially acts as a
+key value pair. 
+
+Vec: The vec class contains a vector of vec_nodes. 
+
+Hash_tables class: This is a hash_table chained where each bucket is a pointer
+to a vec. 
+
+SUMMARY OF Hash_table_class: Table is heap allocated array, stores pointers to 
+the vec class. Each node in the vec acts as a key value pair. Thus allowing the hash_table to store all the necessary data. 
+
+key_table class: Simplied version of the hash_table class. Once again chained
+with vectors, however, each node in the vector only contains a key. Thus essentially a hash_table of keys only. 
+
+
+IMPORTANT INSTANCES OF CLASSES ABOVE
+-------------------------------------------------------------------------------
+Hash_table h : main table which stores the original words and their instances.
+Hash_table h_lower: secondary table which stores a lowercase version of uppercase keys. 
+Key_table files : Contains all the filenames, this saves space, as they don't need to be reused over and over agin. 
+Key_tabke words_in_line : Stores the words in a line, so that the same key isn't
+inserted twice if it has already been inserted that line.
+
+METHOD
+--------------------------------------------------------------------------------
+1. Read in the file, use index_dir to get all the filenames
+
+2. Loop through every word in every file file. Add the current filenmae to the files key_table. And create an Instance of the key using a pointer to the filename on the key_table and the value of the line the word was present in. Either insert the word as a new key, or add an instance to it to hash_table h. If the word is uppercase, add an instance to h_lower. 
+
+3. Run queries in a while loop using the find function, which hashes so it reaches the correct Vec, then loops through that Vec until it finds the correct key, returns the vector containing all the instances of that key, and prints them in the proper format. If it's a case insentivie query, query both the h_lower hash_table and the h hash_table.
+
+
+Hours/Support Code: About 16. Didn't use support code. 
+
+Feedback:  Definitely fun to optimize. Could've optimized a lot more but had too much other work. Biggest space saver that I can think of is storing the parent directory in a global string and just addding pointers to that everywhere. Would've saved a ton of space. Very importantly learnt that vectors have a search that magnitudes faster than a linked list. 
